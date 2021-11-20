@@ -223,7 +223,7 @@ class AliyunNLS {
       this.log(requestConfig);
 
       Request(requestConfig)
-        .then((_rlt) => {
+        .then((_rlt: any) => {
           this.log('complete:', _rlt);
 
           if (_rlt.data.task_id) {
@@ -271,7 +271,7 @@ class AliyunNLS {
             resolve(rlt.data);
           }
         })
-        .catch((err) => {
+        .catch((err: any) => {
           this.log('status error:', err);
           reject(err);
         });
