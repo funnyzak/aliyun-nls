@@ -63,16 +63,15 @@ export interface AliTtsComplete {
      */
     sentences: any;
 }
-declare class AliTTS {
+declare class AliyunNLS {
     debug: boolean;
     /**
      *长文本合成请求URL
      *
-     * @private
      * @type {string}
      * @memberof AliTTS
      */
-    private ttsEndpoint;
+    ttsEndpoint: string;
     /**
      *应用Key
      *
@@ -97,7 +96,7 @@ declare class AliTTS {
     token: string;
     tokenExpire: number;
     constructor(appKey: string, aliConfig: RPCClient.Config, debug?: boolean);
-    log(...args: any[]): void;
+    log(...args: Object[]): void;
     /**
      * 获取token
      * @returns
@@ -130,7 +129,4 @@ declare class AliTTS {
      */
     checkConfig(): Promise<boolean>;
 }
-export default AliTTS;
-/**
- * class test
- */
+export default AliyunNLS;
