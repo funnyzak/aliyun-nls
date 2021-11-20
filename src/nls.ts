@@ -306,7 +306,7 @@ class AliyunNLS {
             this.log('sync status:', rlt);
           } catch (err) {
             clearInterval(_interval);
-            this.log('sync status error:', err);
+            this.log('sync status error:', err as Error);
             reject(err);
             return;
           }
