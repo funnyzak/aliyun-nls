@@ -243,7 +243,8 @@ class AliyunNLS {
    */
   async checkConfig() {
     try {
-      return (await this.taskSync('h')).audio_address.length > 0;
+      await this.getToken();
+      return true;
     } catch (err) {
       return false;
     }
