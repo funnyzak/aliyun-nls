@@ -18,7 +18,6 @@
     "declaration": false
   },
   "include": [
-    "./src/**/*",
-    "index.js"
-  ]
+    "./src/**/*"
+, "lib/nls.d.ts"  ]
 }
