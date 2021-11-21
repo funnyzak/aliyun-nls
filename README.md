@@ -76,7 +76,7 @@ console.log(checkRlt ? 'the config is passed' : 'error config');
 - `taskId` string - 任务 ID。
 - `appKey` string (optional) - 应用 Key。
 
-返回值 `Promise<AliNLSComplete>` - 处理结果
+返回值 `Promise<AliNLSComplete>` - 转换状态。
 
 ```js
 const taskId = await _aliyunNls.task('你好，世界！', {
@@ -93,7 +93,7 @@ console.log(taskId);
 - `options` AliNLSOption - 高级设置。
 - `interval` number (optional) - 检查转换状态的轮训事件间隔（秒）。
 
-Returns Promise<AliNLSComplete>.
+返回值 `Promise<AliNLSComplete>` - 转换状态。
 
 ```js
 const rlt = await _aliyunNls.taskSync('你好，世界！', {
