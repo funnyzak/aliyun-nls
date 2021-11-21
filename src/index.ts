@@ -1,9 +1,7 @@
 'use strict';
 
-import AliyunNLS from './nls'
+import AliyunNLS from './nls';
 
-export default AliyunNLS
+export default AliyunNLS;
 
-export {
-  AliyunNLS
-}
+export { AliyunNLS };

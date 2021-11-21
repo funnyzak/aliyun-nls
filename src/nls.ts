@@ -6,7 +6,7 @@ const Request = require('request-promise');
 /**
  * 长语音合成参数
  */
-export interface AliTtsOption {
+export interface AliNLSOption {
   // https://help.aliyun.com/document_detail/130555.html
   appKey?: string;
   /**
@@ -26,11 +26,11 @@ export interface AliTtsOption {
    */
   volume?: number;
   /**
-   * 语速，范围是-500~500，默认是0。
+   * 语速，范围是0-100，默认是50。
    */
   speech_rate?: number;
   /**
-   * 语调，范围是-500~500，默认是0。
+   * 语调，范围是0-100，默认是50。
    */
   pitch_rate?: number;
   /**
@@ -51,7 +51,7 @@ export interface AliTtsOption {
 /**
  * 合成的返回数据定义
  */
-export interface AliTtsComplete {
+export interface AliNLSComplete {
   /**
    * 返回的任务ID
    */
@@ -166,7 +166,7 @@ class AliyunNLS {
    * @param options 转换选项
    * @returns
    */
-  task(text: string, options?: AliTtsOption): Promise<string> {
+  task(text: string, options?: AliNLSOption): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       let _token = '';
       try {
@@ -204,8 +204,8 @@ class AliyunNLS {
               sample_rate: sample_rate || 16000,
               voice,
               volume,
-              speech_rate: speech_rate ? (speech_rate - 50) * 10 : 0, // 0-100转换为阿里云-500-500值范围
-              pitch_rate: pitch_rate ? (pitch_rate - 50) * 10 : 0,
+              speech_rate: speech_rate ? (speech_rate - 50) * 10 : 50, // 0-100转换为阿里云-500-500值范围
+              pitch_rate: pitch_rate ? (pitch_rate - 50) * 10 : 50,
               enable_subtitle
             },
             enable_notify: enable_notify || false,
@@ -245,8 +245,8 @@ class AliyunNLS {
    * @param appKey
    * @returns
    */
-  status(taskId: string, appKey?: string): Promise<AliTtsComplete> {
-    return new Promise<AliTtsComplete>(async (resolve, reject) => {
+  status(taskId: string, appKey?: string): Promise<AliNLSComplete> {
+    return new Promise<AliNLSComplete>(async (resolve, reject) => {
       let _token = '';
       try {
         _token = await this.getToken();
@@ -287,9 +287,9 @@ class AliyunNLS {
   taskSync(
     text: string,
     interval: number = 3,
-    options?: AliTtsOption
-  ): Promise<AliTtsComplete> {
-    return new Promise<AliTtsComplete>(async (resolve, reject) => {
+    options?: AliNLSOption
+  ): Promise<AliNLSComplete> {
+    return new Promise<AliNLSComplete>(async (resolve, reject) => {
       let taskId = '';
       try {
         taskId = await this.task(text, options);
@@ -300,7 +300,7 @@ class AliyunNLS {
 
       const _interval = setInterval(async () => {
         try {
-          let rlt: AliTtsComplete;
+          let rlt: AliNLSComplete;
           try {
             rlt = await this.status(taskId);
             this.log('sync status:', rlt);
