@@ -27,7 +27,7 @@ class AliyunNLS {
     const error = (_message) => chalk`{red ERROR:} ${_message}`;
     switch (level) {
       case 'error':
-        this.log(error(message));
+        console.info(error(message));
         break;
       case 'warn':
         console.warn(warning(message));
@@ -117,7 +117,7 @@ class AliyunNLS {
               text,
               format: format || 'mp3',
               sample_rate: sample_rate || 16000,
-              voice: voice || 50,
+              voice: voice || 'xiaoyun',
               volume: volume || 50,
               speech_rate: speech_rate ? (speech_rate - 50) * 10 : 50, // 0-100 to -500-50 format
               pitch_rate: pitch_rate ? (pitch_rate - 50) * 10 : 50,
@@ -205,8 +205,8 @@ class AliyunNLS {
       try {
         taskId = await this.task(text, options);
       } catch (err) {
-        this.log(err.message, 'error');
         reject(err);
+        return;
       }
 
       const _interval = setInterval(async () => {
@@ -237,7 +237,7 @@ class AliyunNLS {
    */
   async checkConfig() {
     try {
-      return (await this.taskSync('h', 2)).audio_address.length > 0;
+      return (await this.taskSync('h')).audio_address.length > 0;
     } catch (err) {
       return false;
     }
