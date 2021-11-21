@@ -1,3 +1,5 @@
+# AliYun Cloud NLS
+
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![license][license-image]][repository-url]
 [![NPM version][npm-image]][npm-url]
@@ -9,8 +11,6 @@
 [npm-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
 [download-image]: https://img.shields.io/npm/dm/@funnyzak/aliyun-nls.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
-
-# AliYun Cloud NLS
 
 阿里云长语音合成 Node 模块。
 
