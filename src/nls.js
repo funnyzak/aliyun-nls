@@ -177,7 +177,7 @@ class AliyunNLS {
       }
       const _config = {
         method: 'GET',
-        uri: `${this.rpcConfig.endpoint}?appkey=${
+        uri: `${this.rpcConfig.nlsUrl}?appkey=${
           appKey || this.appKey
         }&task_id=${taskId}&token=${_token}`,
         json: true
