@@ -36,7 +36,7 @@ declare class AliyunNLS {
    * @type {RpcConfig}
    * @memberof AliTTS
    */
-  rpcConfig: AliyunNLS.RpcConfig;
+  rpcConfig: AliyunNLS.Config;
 
   /**
    *客户端
@@ -62,7 +62,7 @@ declare class AliyunNLS {
    */
   tokenExpire: number;
 
-  constructor(rpcConfig: AliyunNLS.RpcConfig, appKey?: string);
+  constructor(rpcConfig: AliyunNLS.Config, appKey?: string);
 
   /**
    * debug log
@@ -83,7 +83,7 @@ declare class AliyunNLS {
    * @param options 转换选项
    * @returns
    */
-  task(text: string, options?: AliyunNLS.AliNLSOption): Promise<string>;
+  task(text: string, options?: AliyunNLS.NLSOption): Promise<string>;
 
   /**
    * 获取转换状态
@@ -91,7 +91,7 @@ declare class AliyunNLS {
    * @param appKey
    * @returns
    */
-  status(taskId: string, appKey?: string): Promise<AliyunNLS.AliNLSComplete>;
+  status(taskId: string, appKey?: string): Promise<AliyunNLS.NLSComplete>;
 
   /**
    * 同步完成转换
@@ -101,9 +101,9 @@ declare class AliyunNLS {
    */
   taskSync(
     text: string,
-    options: AliyunNLS.AliNLSOption,
+    options: AliyunNLS.NLSOption,
     interval?: number
-  ): Promise<AliyunNLS.AliNLSComplete>;
+  ): Promise<AliyunNLS.NLSComplete>;
   /**
    *检查配置
    * @returns
@@ -112,14 +112,14 @@ declare class AliyunNLS {
 }
 
 declare namespace AliyunNLS {
-  export interface RpcConfig extends RPCClient.Config {
+  export interface Config extends RPCClient.Config {
     nlsUrl: string;
   }
 
   /**
    * 长语音合成参数
    */
-  export interface AliNLSOption {
+  export interface NLSOption {
     appKey?: string;
     /**
      * 音频编码格式，支持pcm/wav/mp3格式，默认是pcm。
@@ -162,7 +162,7 @@ declare namespace AliyunNLS {
   /**
    * 合成的返回数据定义
    */
-  export interface AliNLSComplete {
+  export interface NLSComplete {
     /**
      * 返回的任务ID
      */

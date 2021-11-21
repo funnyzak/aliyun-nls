@@ -62,21 +62,21 @@ const checkRlt = await _aliyunNls.checkConfig();
 console.log(checkRlt ? 'the config is passed' : 'error config');
 ```
 
-### `task(text: string, options?: AliNLSOption): Promise<string>`
+### `task(text: string, options?: NLSOption): Promise<string>`
 
 - `text` string - 要转换的文本。
-- `options` AliNLSOption (optional) - 高级设置。
+- `options` NLSOption (optional) - 高级设置。
 
 返回值 `Promise<string>` - 返回转换任务 ID。
 
-### `status(taskId: string, appKey?: string): Promise<AliNLSComplete>`
+### `status(taskId: string, appKey?: string): Promise<NLSComplete>`
 
 查询转换状态。
 
 - `taskId` string - 任务 ID。
 - `appKey` string (optional) - 应用 Key。
 
-返回值 `Promise<AliNLSComplete>` - 转换状态。
+返回值 `Promise<NLSComplete>` - 转换状态。
 
 ```js
 const taskId = await _aliyunNls.task('你好，世界！', {
@@ -85,15 +85,15 @@ const taskId = await _aliyunNls.task('你好，世界！', {
 console.log(taskId);
 ```
 
-### `taskSync(text: string, options: AliNLSOption, interval?: number): Promise<AliNLSComplete>;`
+### `taskSync(text: string, options: NLSOption, interval?: number): Promise<NLSComplete>;`
 
 同步返回合成结果。
 
 - `text` string - 要转换的文本。
-- `options` AliNLSOption - 高级设置。
+- `options` NLSOption - 高级设置。
 - `interval` number (optional) - 检查转换状态的轮训事件间隔（秒）。
 
-返回值 `Promise<AliNLSComplete>` - 转换状态。
+返回值 `Promise<NLSComplete>` - 转换状态。
 
 ```js
 const rlt = await _aliyunNls.taskSync('你好，世界！', {
@@ -111,7 +111,7 @@ console.log('audio url => ', rlt.audio_address);
 
 ## 定义
 
-### AliNLSOption
+### NLSOption
 
 - `appKey` - 应用 Key,可选。
 - `format` - 音频编码格式，支持 pcm/wav/mp3 格式，默认是 pcm。
@@ -124,7 +124,7 @@ console.log('audio url => ', rlt.audio_address);
 - `enable_notify` - 是否启用回调功能，默认值为 false。
 - `notify_url` - 回调服务的地址。当 enable_notify 取值为 true 时，本字段必填。URL 支持 HTTP/HTTPS 协议，Host 不能使用 IP 地址。
 
-### AliNLSComplete
+### NLSComplete
 
 - `task_id` string - 任务 ID
 - `audio_address` string - 合成的音频 URL

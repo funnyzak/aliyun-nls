@@ -5,26 +5,26 @@ const AliyunNLS = require('../lib/nls');
 
 describe('AliyunNLS Core', function () {
   describe('AliyunNLS', function () {
-    it('should pass into "rpcConfig.accessKeyId"', function () {
+    it('should pass into "config.accessKeyId"', function () {
       expect(function () {
         new AliyunNLS({
           endpoint: 'http://ecs.aliyuncs.com/',
           apiVersion: '1.0'
         });
-      }).to.throwException(/must pass "rpcConfig\.accessKeyId"/);
+      }).to.throwException(/must pass "config\.accessKeyId"/);
     });
 
-    it('should pass into "rpcConfig.accessKeySecret"', function () {
+    it('should pass into "config.accessKeySecret"', function () {
       expect(function () {
         new AliyunNLS({
           endpoint: 'http://ecs.aliyuncs.com/',
           apiVersion: '1.0',
           accessKeyId: 'accessKeyId'
         });
-      }).to.throwException(/must pass "rpcConfig\.accessKeySecret"/);
+      }).to.throwException(/must pass "config\.accessKeySecret"/);
     });
 
-    it('should pass into "rpcConfig.nlsUrl"', function () {
+    it('should pass into "config.nlsUrl"', function () {
       expect(function () {
         new AliyunNLS({
           endpoint: 'http://ecs.aliyuncs.com/',
@@ -32,7 +32,7 @@ describe('AliyunNLS Core', function () {
           accessKeyId: 'accessKeyId',
           accessKeySecret: 'accessKeySecret'
         });
-      }).to.throwException(/must pass "rpcConfig\.nlsUrl"/);
+      }).to.throwException(/must pass "config\.nlsUrl"/);
     });
 
     it('should ok with http endpoint', function () {
@@ -43,7 +43,7 @@ describe('AliyunNLS Core', function () {
         accessKeySecret: 'accessKeySecret',
         nlsUrl: 'https://nls-gateway.cn-shanghai.aliyuncs.com/rest/v1/tts/async'
       });
-      expect(nls.rpcConfig.endpoint).to.be('http://ecs.aliyuncs.com');
+      expect(nls.config.endpoint).to.be('http://ecs.aliyuncs.com');
       expect(nls.client.keepAliveAgent.protocol).to.be('http:');
     });
 

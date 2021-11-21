@@ -6,19 +6,19 @@ const RP = require('request-promise');
 const chalk = require('chalk');
 
 class AliyunNLS {
-  constructor(rpcConfig, appKey = '') {
-    assert(rpcConfig, 'must pass "rpcConfig"');
-    assert(rpcConfig.accessKeyId, 'must pass "rpcConfig.accessKeyId"');
-    assert(rpcConfig.accessKeySecret, 'must pass "rpcConfig.accessKeySecret"');
-    assert(rpcConfig.nlsUrl, 'must pass "rpcConfig.nlsUrl"');
+  constructor(config, appKey = '') {
+    assert(config, 'must pass "config"');
+    assert(config.accessKeyId, 'must pass "config.accessKeyId"');
+    assert(config.accessKeySecret, 'must pass "config.accessKeySecret"');
+    assert(config.nlsUrl, 'must pass "config.nlsUrl"');
 
     this.appKey = appKey;
-    this.rpcConfig = {
+    this.config = {
       endpoint: 'https://nls-meta.cn-shanghai.aliyuncs.com',
       apiVersion: '2019-02-28',
-      ...rpcConfig
+      ...config
     };
-    this.client = new AliyunRPC(this.rpcConfig);
+    this.client = new AliyunRPC(this.config);
 
     this.tokenExpire =
       parseInt((new Date().getTime() / 1000).toString(), 10) - 10;
@@ -112,7 +112,7 @@ class AliyunNLS {
 
       const requestConfig = {
         method: 'POST',
-        uri: this.rpcConfig.nlsUrl,
+        uri: this.config.nlsUrl,
         json: true,
         headers: {
           'Content-Type': 'application/json'
@@ -177,7 +177,7 @@ class AliyunNLS {
       }
       const _config = {
         method: 'GET',
-        uri: `${this.rpcConfig.nlsUrl}?appkey=${
+        uri: `${this.config.nlsUrl}?appkey=${
           appKey || this.appKey
         }&task_id=${taskId}&token=${_token}`,
         json: true
