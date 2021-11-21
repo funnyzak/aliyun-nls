@@ -89,7 +89,10 @@ module.exports = {
     browser: true
   },
   globals: {
-    describe: true
+    describe: true,
+    it: true,
+    before: true,
+    after: true
   },
   parserOptions: {
     ecmaVersion: 2018,

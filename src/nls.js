@@ -1,19 +1,20 @@
 'use strict';
 
+const assert = require('assert');
 const AliyunRPC = require('@alicloud/pop-core');
-const Request = require('request-promise');
+const RP = require('request-promise');
 const chalk = require('chalk');
 
 class AliyunNLS {
-  constructor(rpcConfig = {}, appKey = '') {
+  constructor(rpcConfig, appKey = '') {
+    assert(rpcConfig, 'must pass "rpcConfig"');
+    assert(rpcConfig.accessKeyId, 'must pass "rpcConfig.accessKeyId"');
+    assert(rpcConfig.accessKeySecret, 'must pass "rpcConfig.accessKeySecret"');
+
     this.appKey = appKey;
     this.rpcConfig = {
-      accessKeyId: 'accessKeyId',
-      accessKeySecret: 'accessKeySecret',
-      endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',
+      endpoint: 'https://nls-meta.cn-shanghai.aliyuncs.com',
       apiVersion: '2019-02-28',
-      codes: [],
-      opts: {},
       ...rpcConfig
     };
     this.client = new AliyunRPC(this.rpcConfig);
@@ -141,7 +142,7 @@ class AliyunNLS {
       };
       this.log(`request config: ${JSON.stringify(requestConfig)}`);
 
-      Request(requestConfig)
+      RP(requestConfig)
         .then((_rlt) => {
           this.log(`get task: ${JSON.stringify(_rlt)}`);
 
@@ -181,7 +182,7 @@ class AliyunNLS {
         json: true
       };
 
-      Request(_config)
+      RP(_config)
         .then((rlt) => {
           this.log(`task status: ${JSON.stringify(rlt)}.`);
           if (rlt.error_code !== 20000000) {
