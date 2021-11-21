@@ -4,7 +4,7 @@
 
 # AliYun Cloud NLS
 
-阿里云语音合成 Node 模块
+阿里云语音合成 Node 模块。
 
 ## 开始
 
@@ -25,9 +25,8 @@ const { AliyunNls } = require('@funnyzak/aliyun-nls');
       accessKeySecret: 'this is accessKeySecret',
       endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',
       apiVersion: '2019-02-28'
-      /* options */
     },
-    true
+    true /**debug log**/
   );
 
   // test aliyun api config
@@ -45,11 +44,34 @@ const { AliyunNls } = require('@funnyzak/aliyun-nls');
 
 ### `checkConfig(): Promise<boolean>`
 
-返回值 `bool` - 返回阿里云语音配置密钥是否有效。
+返回值 `Promise<boolean>` - 返回阿里云语音配置密钥是否有效。
 
 ```js
 const checkRlt = await _aliyunNls.checkConfig();
 console.log(checkRlt ? 'the config is passed' : 'error config');
+```
+
+### `task(text: string, options?: AliNLSOption): Promise<string>`
+
+- `text` string - 要转换的文本。
+- `options` AliNLSOption (optional) - 高级设置。
+
+返回值 `Promise<string>` - 返回转换任务 ID。
+
+### `status(taskId: string, appKey?: string): Promise<AliNLSComplete>`
+
+查询转换状态。
+
+- `taskId` string - 任务 ID。
+- `appKey` string (optional) - 应用 Key。
+
+返回值 `Promise<AliNLSComplete>` - 处理结果
+
+```js
+const taskId = await _aliyunNls.task('你好，世界！', {
+  /** options **/
+});
+console.log(taskId);
 ```
 
 ### `taskSync(text: string, interval?: number, options?: AliNLSOption): Promise<AliNLSComplete>;`
@@ -58,24 +80,9 @@ console.log(checkRlt ? 'the config is passed' : 'error config');
 
 - `text` string - 要转换的文本。
 - `interval` number (optional) - 检查转换状态的轮训事件间隔（秒）。
-- `options` AliNLSOption (optional) - 高级设置。支持如下选项：
-- - `appKey` - 应用 Key,可选。
-- - `format` - 音频编码格式，支持 pcm/wav/mp3 格式，默认是 pcm。
-- - `sample_rate` - 音频采样率，支持 16000Hz 和 8000Hz，默认是 16000Hz。
-- - `voice` - 发音人，默认是 xiaoyun。更多发音人请参见[接口说明](https://help.aliyun.com/document_detail/130509.htm?spm=a2c4g.11186623.0.0.442a38adeflvK0#topic-2606811)。
-- - `volume` - 音量，范围是 0~100，默认 50。
-- - `speech_rate` - 语速，范围是 0-100，默认是 50。
-- - `pitch_rate` - 语调，范围是 0-100，默认是 50。
-- - `enable_subtitle` - 是否启用句级时间戳功能，默认值为 false。
-- - `enable_notify` - 是否启用回调功能，默认值为 false。
-- - `notify_url` - 回调服务的地址。当 enable_notify 取值为 true 时，本字段必填。URL 支持 HTTP/HTTPS 协议，Host 不能使用 IP 地址。
+- `options` AliNLSOption (optional) - 高级设置。
 
-Returns Promise<AliNLSComplete> - Resolve with an object containing the following:
-
-- `task_id` string - 任务 ID
-- `audio_address` string - 合成的音频 URL
-- `notify_custom` string - 回调地址
-- `sentences` json - 句级时间戳对象
+Returns Promise<AliNLSComplete>.
 
 ```js
 const rlt = await _aliyunNls.taskSync('你好，世界！', 2, {
@@ -90,6 +97,28 @@ const rlt = await _aliyunNls.taskSync('你好，世界！', 2, {
 
 console.log('audio url => ', rlt.audio_address);
 ```
+
+## 定义
+
+### AliNLSOption
+
+- `appKey` - 应用 Key,可选。
+- `format` - 音频编码格式，支持 pcm/wav/mp3 格式，默认是 pcm。
+- `sample_rate` - 音频采样率，支持 16000Hz 和 8000Hz，默认是 16000Hz。
+- `voice` - 发音人，默认是 xiaoyun。更多发音人请参见[接口说明](https://help.aliyun.com/document_detail/130509.htm?spm=a2c4g.11186623.0.0.442a38adeflvK0#topic-2606811)。
+- `volume` - 音量，范围是 0~100，默认 50。
+- `speech_rate` - 语速，范围是 0-100，默认是 50。
+- `pitch_rate` - 语调，范围是 0-100，默认是 50。
+- `enable_subtitle` - 是否启用句级时间戳功能，默认值为 false。
+- `enable_notify` - 是否启用回调功能，默认值为 false。
+- `notify_url` - 回调服务的地址。当 enable_notify 取值为 true 时，本字段必填。URL 支持 HTTP/HTTPS 协议，Host 不能使用 IP 地址。
+
+### AliNLSComplete
+
+- `task_id` string - 任务 ID
+- `audio_address` string - 合成的音频 URL
+- `notify_custom` string - 回调地址
+- `sentences` json - 句级时间戳对象
 
 ## Author
 
