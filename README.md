@@ -4,7 +4,7 @@
 
 # AliYun Cloud NLS
 
-阿里云语音合成 Node 模块。
+阿里云长语音合成 Node 模块。
 
 ## 开始
 
@@ -124,6 +124,10 @@ console.log('audio url => ', rlt.audio_address);
 | [![twitter/funnyzak](https://s.gravatar.com/avatar/c2437e240644b1317a4a356c6d6253ee?s=70)](https://twitter.com/funnyzak 'Follow @funnyzak on Twitter') |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [funnyzak](https://yycc.me/)                                                                                                                           |
+
+## 参考
+
+- [长文本语音合成文档](https://help.aliyun.com/document_detail/130509.htm?spm=a2c4g.11186623.0.0.442a38adeflvK0#topic-2606811)
 
 ## License
 
