@@ -10,7 +10,7 @@
   "types": "lib/nls.d.ts",
   "scripts": {
     "lint": "eslint --fix src",
-    "test": "mocha test/*.test.js",
+    "test": "npm run build && mocha test/*.test.js",
     "dev": "watch \"npm run build\" src",
     "build": "babel src -d lib",
     "prepublish": "npm run build",
