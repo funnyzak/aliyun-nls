@@ -8,8 +8,12 @@ class AliyunNLS {
   constructor(rpcConfig = {}, appKey = '') {
     this.appKey = appKey;
     this.rpcConfig = {
+      accessKeyId: 'accessKeyId',
+      accessKeySecret: 'accessKeySecret',
       endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',
       apiVersion: '2019-02-28',
+      codes: [],
+      opts: {},
       ...rpcConfig
     };
     this.client = new AliyunRPC(this.rpcConfig);
