@@ -5,7 +5,7 @@ const Request = require('request-promise');
 const chalk = require('chalk');
 
 class AliyunNLS {
-  constructor(appKey = '', rpcConfig = {}) {
+  constructor(rpcConfig = {}, appKey = '') {
     this.appKey = appKey;
     this.rpcConfig = {
       endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',

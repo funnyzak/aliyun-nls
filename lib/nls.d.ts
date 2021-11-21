@@ -62,7 +62,7 @@ declare class AliyunNLS {
    */
   tokenExpire: number;
 
-  constructor(appKey: string, rpcConfig: RPCClient.Config);
+  constructor(rpcConfig: RPCClient.Config, appKey?: string);
 
   /**
    * debug log

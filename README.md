@@ -19,14 +19,13 @@ const { AliyunNLS } = require('@funnyzak/aliyun-nls');
 
 !(async () => {
   const _aliyunNls = new AliyunNLS(
-    'this is app key',
     {
       accessKeyId: 'this is accessKeyId',
       accessKeySecret: 'this is accessKeySecret',
       endpoint: 'http://nls-meta.cn-shanghai.aliyuncs.com',
       apiVersion: '2019-02-28'
     },
-    true /**debug log**/
+    'this is app key' /** optional **/
   );
 
   // test aliyun api config
