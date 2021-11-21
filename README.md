@@ -15,10 +15,10 @@ from [npm](https://github.com/npm/npm)
 ## 用例
 
 ```js
-const { AliyunNls } = require('@funnyzak/aliyun-nls');
+const { AliyunNLS } = require('@funnyzak/aliyun-nls');
 
 !(async () => {
-  const _aliyunNls = new AliyunNls(
+  const _aliyunNls = new AliyunNLS(
     'this is app key',
     {
       accessKeyId: 'this is accessKeyId',
@@ -38,7 +38,7 @@ const { AliyunNls } = require('@funnyzak/aliyun-nls');
 
 了解更多 [nls define](lib/nls.d.ts).
 
-# 函数
+## 函数
 
 `AliyunNls` 有如下方法:
 
@@ -74,18 +74,18 @@ const taskId = await _aliyunNls.task('你好，世界！', {
 console.log(taskId);
 ```
 
-### `taskSync(text: string, interval?: number, options?: AliNLSOption): Promise<AliNLSComplete>;`
+### `taskSync(text: string, options: AliNLSOption, interval?: number): Promise<AliNLSComplete>;`
 
 同步返回合成结果。
 
 - `text` string - 要转换的文本。
+- `options` AliNLSOption - 高级设置。
 - `interval` number (optional) - 检查转换状态的轮训事件间隔（秒）。
-- `options` AliNLSOption (optional) - 高级设置。
 
 Returns Promise<AliNLSComplete>.
 
 ```js
-const rlt = await _aliyunNls.taskSync('你好，世界！', 2, {
+const rlt = await _aliyunNls.taskSync('你好，世界！', {
   format: 'mp3'
   sample_rate: 16000,
   voice: 'xiaoyun',

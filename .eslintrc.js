@@ -31,9 +31,10 @@ module.exports = {
     // http://eslint.org/docs/rules/comma-style
     'comma-style': [2, 'last'],
     // 圈复杂度
-    'complexity': [2, 12],
+    'complexity': [2, 15],
     // 文件末尾强制换行
     'eol-last': 2,
+    'no-redeclare': [2, { builtinGlobals: true }],
     // 方法表达式是否需要命名
     'func-names': 0,
     'no-alert': 0, //禁止使用alert confirm prompt
@@ -90,12 +91,12 @@ module.exports = {
   globals: {
     describe: true
   },
-  plugins: ['@typescript-eslint'],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 'latest',
-    projectFolderIgnoreList: ['**/node_modules/**'],
-    sourceType: 'module'
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   extends: 'eslint:recommended'
 };

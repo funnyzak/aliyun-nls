@@ -2,23 +2,17 @@
   "name": "@funnyzak/aliyun-nls",
   "version": "0.1.1",
   "description": "a aliyun nls node module.",
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "index.js"
   ],
-  "types": "lib/index.d.ts",
-  "typesVersions": {
-    ">=3.1": {
-      "*": [
-        "ts3.1/*"
-      ]
-    }
-  },
+  "types": "lib/nls.d.ts",
   "scripts": {
     "lint": "eslint --fix src",
     "test": "echo \"o test specified\"",
     "dev": "watch \"npm run build\" src",
-    "build": "tsc",
+    "build": "babel src -d lib",
     "prepublish": "npm run build",
     "release": "np",
     "prepare": "husky install"
@@ -28,9 +22,9 @@
     "url": "git+ssh://git@github.com/funnyzak/aliyun-nls.git"
   },
   "keywords": [
-    "server",
-    "static-http-server",
-    "http",
+    "aliyun nls",
+    "nls",
+    "aliyun",
     "nodejs",
     "funnyzak"
   ],
@@ -50,8 +44,6 @@
     "@babel/core": "7.16.0",
     "@babel/plugin-transform-runtime": "7.16.4",
     "@babel/preset-env": "7.16.4",
-    "@typescript-eslint/eslint-plugin": "5.4.0",
-    "@typescript-eslint/parser": "5.4.0",
     "core-js": "3.19.1",
     "eslint": "8.2.0",
     "husky": "7.0.4",

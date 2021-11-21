@@ -9,15 +9,16 @@
       "DOM"
     ],
     "moduleResolution": "node",
-    "module": "CommonJS",
+    "module": "esnext",
     "target": "es5",
     "allowJs": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "outDir": "./lib",
-    "declaration": true
+    "declaration": false
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "index.js"
   ]
 }
