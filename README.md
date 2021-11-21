@@ -1,6 +1,14 @@
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
-[![npm](https://img.shields.io/npm/v/@funnyzak/aliyun-nls.svg?style=flat-square)](https://www.npmjs.com/package/@funnyzak/aliyun-nls)
-[![license](https://img.shields.io/github/license/funnyzak/static-http-server.svg?style=flat-square)](https://github.com/funnyzak/static-http-server)
+[![license][license-image]][repository-url]
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
+
+[license-image]: https://img.shields.io/github/license/funnyzak/aliyun-nls.svg?style=flat-square
+[repository-url]: https://github.com/funnyzak/aliyun-nls
+[npm-image]: https://img.shields.io/npm/v/@funnyzak/aliyun-nls.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
+[download-image]: https://img.shields.io/npm/dm/@funnyzak/aliyun-nls.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
 
 # AliYun Cloud NLS
 
