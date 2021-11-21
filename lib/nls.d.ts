@@ -33,10 +33,10 @@ declare class AliyunNLS {
   /**
    *密钥配置
    *
-   * @type {RPCClient.Config}
+   * @type {RpcConfig}
    * @memberof AliTTS
    */
-  rpcConfig: RPCClient.Config;
+  rpcConfig: AliyunNLS.RpcConfig;
 
   /**
    *客户端
@@ -62,7 +62,7 @@ declare class AliyunNLS {
    */
   tokenExpire: number;
 
-  constructor(rpcConfig: RPCClient.Config, appKey?: string);
+  constructor(rpcConfig: AliyunNLS.RpcConfig, appKey?: string);
 
   /**
    * debug log
@@ -112,6 +112,10 @@ declare class AliyunNLS {
 }
 
 declare namespace AliyunNLS {
+  export interface RpcConfig extends RPCClient.Config {
+    nlsUrl: string;
+  }
+
   /**
    * 长语音合成参数
    */
