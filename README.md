@@ -34,6 +34,7 @@ const { AliyunNLS } = require('@funnyzak/aliyun-nls');
       accessKeyId: 'accessKeyId',
       accessKeySecret: 'accessKeySecret',
       endpoint: 'https://nls-meta.cn-shanghai.aliyuncs.com',
+      nlsUrl: 'https://nls-gateway.cn-shanghai.aliyuncs.com/rest/v1/tts/async',
       apiVersion: '2019-02-28'
     },
     'app key' /** optional **/

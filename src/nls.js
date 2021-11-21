@@ -10,6 +10,7 @@ class AliyunNLS {
     assert(rpcConfig, 'must pass "rpcConfig"');
     assert(rpcConfig.accessKeyId, 'must pass "rpcConfig.accessKeyId"');
     assert(rpcConfig.accessKeySecret, 'must pass "rpcConfig.accessKeySecret"');
+    assert(rpcConfig.nlsUrl, 'must pass "rpcConfig.nlsUrl"');
 
     this.appKey = appKey;
     this.rpcConfig = {
@@ -111,7 +112,7 @@ class AliyunNLS {
 
       const requestConfig = {
         method: 'POST',
-        uri: this.rpcConfig.endpoint,
+        uri: this.rpcConfig.nlsUrl,
         json: true,
         headers: {
           'Content-Type': 'application/json'

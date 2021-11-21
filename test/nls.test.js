@@ -24,12 +24,24 @@ describe('AliyunNLS Core', function () {
       }).to.throwException(/must pass "rpcConfig\.accessKeySecret"/);
     });
 
+    it('should pass into "rpcConfig.nlsUrl"', function () {
+      expect(function () {
+        new AliyunNLS({
+          endpoint: 'http://ecs.aliyuncs.com/',
+          apiVersion: '1.0',
+          accessKeyId: 'accessKeyId',
+          accessKeySecret: 'accessKeySecret'
+        });
+      }).to.throwException(/must pass "rpcConfig\.nlsUrl"/);
+    });
+
     it('should ok with http endpoint', function () {
       const nls = new AliyunNLS({
         endpoint: 'http://ecs.aliyuncs.com',
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',
-        accessKeySecret: 'accessKeySecret'
+        accessKeySecret: 'accessKeySecret',
+        nlsUrl: 'https://nls-gateway.cn-shanghai.aliyuncs.com/rest/v1/tts/async'
       });
       expect(nls.rpcConfig.endpoint).to.be('http://ecs.aliyuncs.com');
       expect(nls.client.keepAliveAgent.protocol).to.be('http:');
@@ -40,7 +52,8 @@ describe('AliyunNLS Core', function () {
         endpoint: 'https://ecs.aliyuncs.com/',
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',
-        accessKeySecret: 'accessKeySecret'
+        accessKeySecret: 'accessKeySecret',
+        nlsUrl: 'https://nls-gateway.cn-shanghai.aliyuncs.com/rest/v1/tts/async'
       });
       expect(nls.client.endpoint).to.be('https://ecs.aliyuncs.com');
       expect(nls.client.keepAliveAgent.protocol).to.be('https:');
@@ -52,7 +65,8 @@ describe('AliyunNLS Core', function () {
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',
         accessKeySecret: 'accessKeySecret',
-        codes: ['True']
+        codes: ['True'],
+        nlsUrl: 'https://nls-gateway.cn-shanghai.aliyuncs.com/rest/v1/tts/async'
       });
       expect(nls.client.codes.has('True')).to.be.ok();
     });
