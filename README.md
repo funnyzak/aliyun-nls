@@ -22,7 +22,7 @@
 - [AliYun NLS](#aliyun-nls)
   - [目录](#目录)
   - [开始](#开始)
-  - [长文本合成](#长文本合成)
+  - [长文本语音合成](#长文本语音合成)
     - [用例](#用例)
     - [函数](#函数)
       - [`checkConfig(): Promise<boolean>`](#checkconfig-promiseboolean)
@@ -42,7 +42,7 @@ from [npm](https://github.com/npm/npm)
 
     $ npm install/aliyun-nls
 
-## 长文本合成
+## 长文本语音合成
 
 ### 用例
 
