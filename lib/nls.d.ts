@@ -82,9 +82,14 @@ declare namespace AliyunNLS {
      * 开始转换任务，并获取任务ID
      * @param text 文本内容
      * @param options 转换选项
+     * @param appKey 使用的应用key
      * @returns
      */
-    task(text: string, options?: AliyunTTS.TTSOption): Promise<string>;
+    task(
+      text: string,
+      options?: AliyunTTS.TTSOption,
+      appKey?: string
+    ): Promise<string>;
 
     /**
      * 获取转换状态

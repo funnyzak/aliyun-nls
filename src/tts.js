@@ -84,7 +84,7 @@ class AliyunNLS {
    * @param options 转换选项
    * @returns
    */
-  task(text, options = {}) {
+  task(text, options, appKey) {
     return new Promise(async (resolve, reject) => {
       if (!text || text === null || text.length === 0) {
         this.log(`nls text cant's null.`, 'warn');
@@ -125,8 +125,12 @@ class AliyunNLS {
               sample_rate: _options.sample_rate,
               voice: _options.voice,
               volume: _options.volume,
-              speech_rate: _options.speech_rate ? (_options.speech_rate - 50) * 10 : 50, // 0-100 to -500-50 format
-              pitch_rate: _options.pitch_rate ? (_options.pitch_rate - 50) * 10 : 50,
+              speech_rate: _options.speech_rate
+                ? (_options.speech_rate - 50) * 10
+                : 50, // 0-100 to -500-50 format
+              pitch_rate: _options.pitch_rate
+                ? (_options.pitch_rate - 50) * 10
+                : 50,
               enable_subtitle: _options.enable_subtitle
             },
             enable_notify: _options.enable_notify,
@@ -150,12 +154,11 @@ class AliyunNLS {
           this.log(`get task: ${JSON.stringify(_rlt)}`);
 
           if (_rlt.data.task_id) {
-
             this.taskMap[_rlt.data.task_id] = {
               options: _options,
               text: text,
               startTime: _startTime
-            }
+            };
 
             resolve(_rlt.data.task_id);
           } else {
@@ -198,12 +201,16 @@ class AliyunNLS {
             reject(new Error(rlt.error_message));
           } else {
             const rltData = rlt.data;
-            const isComplete = rltData.audio_address !== null && rltData.audio_address.length > 0;
+            const isComplete =
+              rltData.audio_address !== null &&
+              rltData.audio_address.length > 0;
             resolve({
               ...rlt.data,
               ...this.taskMap[taskId],
               appKey: _appKey,
-              elapsed: isComplete ? (new Date().getTime() - this.taskMap[taskId].startTime) : -1
+              elapsed: isComplete
+                ? new Date().getTime() - this.taskMap[taskId].startTime
+                : -1
             });
           }
         })

@@ -87,6 +87,7 @@ console.log(checkRlt ? 'the config is passed' : 'error config');
 
 - `text` string - 要转换的文本。
 - `options` NLSOption (optional) - 高级设置。
+- `appKey` string (optional) - 应用 key。
 
 返回值 `Promise<string>` - 返回转换任务 ID。
 
