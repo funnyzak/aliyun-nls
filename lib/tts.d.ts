@@ -50,7 +50,7 @@ declare class AliyunTTS {
    *Token 值
    *
    * @type {string}
-   * @memberof AliyunNLS
+   * @memberof AliyunTTS
    */
   token: string;
 
@@ -58,7 +58,7 @@ declare class AliyunTTS {
    *token 过期时间
    *
    * @type {number}
-   * @memberof AliyunNLS
+   * @memberof AliyunTTS
    */
   tokenExpire: number;
 
