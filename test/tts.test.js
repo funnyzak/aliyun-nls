@@ -1,13 +1,13 @@
 'use strict';
 
 const expect = require('expect.js');
-const AliyunNLS = require('../lib/nls');
+const AliyunTTS = require('../lib/tts');
 
-describe('AliyunNLS Core', function () {
-  describe('AliyunNLS', function () {
+describe('AliyunTTS Core', function () {
+  describe('AliyunTTS', function () {
     it('should pass into "config.accessKeyId"', function () {
       expect(function () {
-        new AliyunNLS({
+        new AliyunTTS({
           endpoint: 'http://ecs.aliyuncs.com/',
           apiVersion: '1.0'
         });
@@ -16,7 +16,7 @@ describe('AliyunNLS Core', function () {
 
     it('should pass into "config.accessKeySecret"', function () {
       expect(function () {
-        new AliyunNLS({
+        new AliyunTTS({
           endpoint: 'http://ecs.aliyuncs.com/',
           apiVersion: '1.0',
           accessKeyId: 'accessKeyId'
@@ -26,7 +26,7 @@ describe('AliyunNLS Core', function () {
 
     it('should pass into "config.nlsUrl"', function () {
       expect(function () {
-        new AliyunNLS({
+        new AliyunTTS({
           endpoint: 'http://ecs.aliyuncs.com/',
           apiVersion: '1.0',
           accessKeyId: 'accessKeyId',
@@ -36,7 +36,7 @@ describe('AliyunNLS Core', function () {
     });
 
     it('should ok with http endpoint', function () {
-      const nls = new AliyunNLS({
+      const nls = new AliyunTTS({
         endpoint: 'http://ecs.aliyuncs.com',
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',
@@ -48,7 +48,7 @@ describe('AliyunNLS Core', function () {
     });
 
     it('should ok with https endpoint', function () {
-      const nls = new AliyunNLS({
+      const nls = new AliyunTTS({
         endpoint: 'https://ecs.aliyuncs.com/',
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',
@@ -60,7 +60,7 @@ describe('AliyunNLS Core', function () {
     });
 
     it('should ok with codes', function () {
-      const nls = new AliyunNLS({
+      const nls = new AliyunTTS({
         endpoint: 'https://ecs.aliyuncs.com/',
         apiVersion: '1.0',
         accessKeyId: 'accessKeyId',

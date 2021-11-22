@@ -23,6 +23,8 @@ class AliyunNLS {
     this.tokenExpire =
       parseInt((new Date().getTime() / 1000).toString(), 10) - 10;
     this.token = '';
+
+    this.taskMap = {};
   }
 
   log(msg, level = 'info') {
@@ -97,18 +99,16 @@ class AliyunNLS {
         return;
       }
 
-      const {
-        appKey,
-        format,
-        sample_rate,
-        voice,
-        volume,
-        speech_rate,
-        pitch_rate,
-        enable_subtitle,
-        enable_notify,
-        notify_url
-      } = options || {};
+      const _options = {
+        format: 'mp3',
+        sample_rate: 16000,
+        voice: 'xiaoyun',
+        volume: 50,
+        enable_notify: false,
+        speech_rate: 50,
+        pitch_rate: 50,
+        ...options
+      };
 
       const requestConfig = {
         method: 'POST',
@@ -121,16 +121,16 @@ class AliyunNLS {
           payload: {
             tts_request: {
               text,
-              format: format || 'mp3',
-              sample_rate: sample_rate || 16000,
-              voice: voice || 'xiaoyun',
-              volume: volume || 50,
-              speech_rate: speech_rate ? (speech_rate - 50) * 10 : 50, // 0-100 to -500-50 format
-              pitch_rate: pitch_rate ? (pitch_rate - 50) * 10 : 50,
-              enable_subtitle
+              format: _options.format,
+              sample_rate: _options.sample_rate,
+              voice: _options.voice,
+              volume: _options.volume,
+              speech_rate: _options.speech_rate ? (_options.speech_rate - 50) * 10 : 50, // 0-100 to -500-50 format
+              pitch_rate: _options.pitch_rate ? (_options.pitch_rate - 50) * 10 : 50,
+              enable_subtitle: _options.enable_subtitle
             },
-            enable_notify: enable_notify || false,
-            notify_url
+            enable_notify: _options.enable_notify,
+            notify_url: _options.notify_url
           },
           context: {
             device_id: (Math.random() + 1).toString(36).substring(7)
@@ -141,13 +141,22 @@ class AliyunNLS {
           }
         }
       };
+
       this.log(`request config: ${JSON.stringify(requestConfig)}`);
+      const _startTime = new Date().getTime();
 
       RP(requestConfig)
         .then((_rlt) => {
           this.log(`get task: ${JSON.stringify(_rlt)}`);
 
           if (_rlt.data.task_id) {
+
+            this.taskMap[_rlt.data.task_id] = {
+              options: _options,
+              text: text,
+              startTime: _startTime
+            }
+
             resolve(_rlt.data.task_id);
           } else {
             reject(new Error('requested and get task id is null.'));
@@ -175,11 +184,10 @@ class AliyunNLS {
         reject(err);
         return;
       }
+      const _appKey = appKey || this.appKey;
       const _config = {
         method: 'GET',
-        uri: `${this.config.nlsUrl}?appkey=${
-          appKey || this.appKey
-        }&task_id=${taskId}&token=${_token}`,
+        uri: `${this.config.nlsUrl}?appkey=${_appKey}&task_id=${taskId}&token=${_token}`,
         json: true
       };
 
@@ -189,7 +197,14 @@ class AliyunNLS {
           if (rlt.error_code !== 20000000) {
             reject(new Error(rlt.error_message));
           } else {
-            resolve(rlt.data);
+            const rltData = rlt.data;
+            const isComplete = rltData.audio_address !== null && rltData.audio_address.length > 0;
+            resolve({
+              ...rlt.data,
+              ...this.taskMap[taskId],
+              appKey: _appKey,
+              elapsed: isComplete ? (new Date().getTime() - this.taskMap[taskId].startTime) : -1
+            });
           }
         })
         .catch((err) => {

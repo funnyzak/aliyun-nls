@@ -22,7 +22,7 @@ import RPCClient from '@alicloud/pop-core';
  *~ is the exported object from the file
  */
 
-declare class AliyunNLS {
+declare class AliyunTTS {
   /**
    *应用Key
    *
@@ -36,7 +36,7 @@ declare class AliyunNLS {
    * @type {RpcConfig}
    * @memberof AliTTS
    */
-  rpcConfig: AliyunNLS.Config;
+  rpcConfig: AliyunTTS.Config;
 
   /**
    *客户端
@@ -62,7 +62,7 @@ declare class AliyunNLS {
    */
   tokenExpire: number;
 
-  constructor(rpcConfig: AliyunNLS.Config, appKey?: string);
+  constructor(rpcConfig: AliyunTTS.Config, appKey?: string);
 
   /**
    * debug log
@@ -83,7 +83,7 @@ declare class AliyunNLS {
    * @param options 转换选项
    * @returns
    */
-  task(text: string, options?: AliyunNLS.NLSOption): Promise<string>;
+  task(text: string, options?: AliyunTTS.TTSOption): Promise<string>;
 
   /**
    * 获取转换状态
@@ -91,7 +91,7 @@ declare class AliyunNLS {
    * @param appKey
    * @returns
    */
-  status(taskId: string, appKey?: string): Promise<AliyunNLS.NLSComplete>;
+  status(taskId: string, appKey?: string): Promise<AliyunTTS.TTSComplete>;
 
   /**
    * 同步完成转换
@@ -101,9 +101,9 @@ declare class AliyunNLS {
    */
   taskSync(
     text: string,
-    options: AliyunNLS.NLSOption,
+    options: AliyunTTS.TTSOption,
     interval?: number
-  ): Promise<AliyunNLS.NLSComplete>;
+  ): Promise<AliyunTTS.TTSComplete>;
   /**
    *检查配置
    * @returns
@@ -111,7 +111,7 @@ declare class AliyunNLS {
   checkConfig(): Promise<boolean>;
 }
 
-declare namespace AliyunNLS {
+declare namespace AliyunTTS {
   export interface Config extends RPCClient.Config {
     nlsUrl: string;
   }
@@ -119,7 +119,7 @@ declare namespace AliyunNLS {
   /**
    * 长语音合成参数
    */
-  export interface NLSOption {
+  export interface TTSOption {
     appKey?: string;
     /**
      * 音频编码格式，支持pcm/wav/mp3格式，默认是pcm。
@@ -162,7 +162,7 @@ declare namespace AliyunNLS {
   /**
    * 合成的返回数据定义
    */
-  export interface NLSComplete {
+  export interface TTSComplete {
     /**
      * 返回的任务ID
      */
@@ -179,7 +179,32 @@ declare namespace AliyunNLS {
      * 句级时间戳对象
      */
     sentences: any;
+
+    /**
+     * 使用的APP Key
+     */
+    appKey: string;
+
+    /**
+     * 合成选项
+     */
+    options: TTSOption;
+
+    /**
+     * 合成文本
+     */
+    text: string;
+
+    /**
+     * 开始时间（毫秒时间戳）
+     */
+    startTime: number;
+
+    /**
+     * 合成耗时（毫秒）
+     */
+    elapsed: number;
   }
 }
 
-export = AliyunNLS;
+export = AliyunTTS;

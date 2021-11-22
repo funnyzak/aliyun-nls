@@ -18,6 +18,7 @@
     "declaration": false
   },
   "include": [
-    "./src/**/*"
-, "lib/nls.d.ts"  ]
+    "./src/**/*",
+    "lib/tts.d.ts"
+  ]
 }

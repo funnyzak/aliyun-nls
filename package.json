@@ -7,7 +7,7 @@
     "lib/**/*",
     "index.js"
   ],
-  "types": "lib/nls.d.ts",
+  "types": "lib/*.d.ts",
   "scripts": {
     "lint": "eslint --fix src",
     "test": "npm run build && mocha test/*.test.js",
@@ -36,6 +36,7 @@
   "homepage": "https://github.com/funnyzak/aliyun-nls#readme",
   "dependencies": {
     "@alicloud/pop-core": "1.7.10",
+    "@babel/runtime": "7.16.3",
     "chalk": "4.1.2",
     "request": "2.88.2",
     "request-promise": "4.2.6"
