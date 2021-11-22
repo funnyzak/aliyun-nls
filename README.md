@@ -10,13 +10,12 @@
 [ci-url]: https://github.com/funnyzak/aliyun-nls/actions
 [license-image]: https://img.shields.io/github/license/funnyzak/aliyun-nls.svg?style=flat-square
 [repository-url]: https://github.com/funnyzak/aliyun-nls
-[npm-image]: https://img.shields.io/npm/v/@funnyzak/aliyun-nls.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
-[download-image]: https://img.shields.io/npm/dm/@funnyzak/aliyun-nls.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
+[npm-image]: https://img.shields.io/npm/v/aliyun-nls.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/aliyun-nls
+[download-image]: https://img.shields.io/npm/dm/aliyun-nls.svg?style=flat-square
+[download-url]: https://npmjs.org/package/aliyun-nls
 
 阿里云自然语言处理 Node 模块。
-
 
 ## 目录
 
@@ -41,14 +40,14 @@
 
 from [npm](https://github.com/npm/npm)
 
-    $ npm install @funnyzak/aliyun-nls
+    $ npm install/aliyun-nls
 
 ## 长文本合成
 
 ### 用例
 
 ```js
-const { AliyunTTS } = require('@funnyzak/aliyun-nls');
+const { AliyunTTS } = require(/aliyun-nls');
 
 !(async () => {
   const _aliyunTTS = new AliyunTTS(
@@ -153,7 +152,7 @@ console.log('complete result => ', JSON.stringify(rlt));
 - `audio_address` string - 合成的音频 URL。
 - `notify_custom` string - 回调地址。
 - `sentences` json - 句级时间戳对象。
-- `appKey`: string - 使用的APP Key。
+- `appKey`: string - 使用的 APP Key。
 - `options`: AliyunTTS.TTSOption - 合成选项。
 - `text`: string - 待合成文本。
 - `startTime`: number - 合成开始时间（毫秒时间戳）。
