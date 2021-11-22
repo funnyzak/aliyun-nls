@@ -1,4 +1,4 @@
-# AliYun Cloud NLS
+# AliYun NLS
 
 [![js-standard-style](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/feross/standard)
 [![action][ci-image]][ci-url]
@@ -15,7 +15,27 @@
 [download-image]: https://img.shields.io/npm/dm/@funnyzak/aliyun-nls.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@funnyzak/aliyun-nls
 
-阿里云长语音合成 Node 模块。
+阿里云自然语言处理 Node 模块。
+
+
+## 目录
+
+- [AliYun NLS](#aliyun-nls)
+  - [目录](#目录)
+  - [开始](#开始)
+  - [长文本合成](#长文本合成)
+    - [用例](#用例)
+    - [函数](#函数)
+      - [`checkConfig(): Promise<boolean>`](#checkconfig-promiseboolean)
+      - [`task(text: string, options?: AliyunTTS.TTSOption): Promise<string>`](#tasktext-string-options-aliyunttsttsoption-promisestring)
+      - [`status(taskId: string, appKey?: string): Promise<AliyunTTS.TTSComplete>`](#statustaskid-string-appkey-string-promisealiyunttsttscomplete)
+      - [`taskSync(text: string, options: AliyunTTS.TTSOption, interval?: number): Promise<AliyunTTS.TTSComplete>;`](#tasksynctext-string-options-aliyunttsttsoption-interval-number-promisealiyunttsttscomplete)
+    - [定义](#定义)
+      - [AliyunTTS.TTSOption](#aliyunttsttsoption)
+      - [AliyunTTS.TTSComplete](#aliyunttsttscomplete)
+  - [Author](#author)
+  - [参考](#参考)
+  - [License](#license)
 
 ## 开始
 
@@ -23,13 +43,15 @@ from [npm](https://github.com/npm/npm)
 
     $ npm install @funnyzak/aliyun-nls
 
-## 用例
+## 长文本合成
+
+### 用例
 
 ```js
-const { AliyunNLS } = require('@funnyzak/aliyun-nls');
+const { AliyunTTS } = require('@funnyzak/aliyun-nls');
 
 !(async () => {
-  const _aliyunNls = new AliyunNLS(
+  const _aliyunTTS = new AliyunTTS(
     {
       accessKeyId: 'accessKeyId',
       accessKeySecret: 'accessKeySecret',
@@ -41,51 +63,52 @@ const { AliyunNLS } = require('@funnyzak/aliyun-nls');
   );
 
   // test aliyun api config
-  console.log((await _aliyunNls.checkConfig()) ? 'passed' : 'error');
+  console.log((await _aliyunTTS.checkConfig()) ? 'passed' : 'error');
 
   // more ...
 })();
 ```
 
-了解更多 [nls define](lib/nls.d.ts).
+了解更多 [TTS Define](https://github.com/funnyzak/aliyun-nls/blob/master/lib/tts.d.ts).
 
-## 函数
+### 函数
 
-`AliyunNls` 有如下方法:
+`AliyunTTS` 有如下方法:
 
-### `checkConfig(): Promise<boolean>`
+#### `checkConfig(): Promise<boolean>`
 
 返回值 `Promise<boolean>` - 返回阿里云语音配置密钥是否有效。
 
 ```js
-const checkRlt = await _aliyunNls.checkConfig();
+const checkRlt = await _aliyunTTS.checkConfig();
 console.log(checkRlt ? 'the config is passed' : 'error config');
 ```
 
-### `task(text: string, options?: NLSOption): Promise<string>`
+#### `task(text: string, options?: AliyunTTS.TTSOption): Promise<string>`
 
 - `text` string - 要转换的文本。
 - `options` NLSOption (optional) - 高级设置。
 
 返回值 `Promise<string>` - 返回转换任务 ID。
 
-### `status(taskId: string, appKey?: string): Promise<NLSComplete>`
+#### `status(taskId: string, appKey?: string): Promise<AliyunTTS.TTSComplete>`
 
 查询转换状态。
 
 - `taskId` string - 任务 ID。
 - `appKey` string (optional) - 应用 Key。
 
-返回值 `Promise<NLSComplete>` - 转换状态。
+返回值 `Promise<AliyunTTS.TTSComplete>` - 转换状态。
 
 ```js
-const taskId = await _aliyunNls.task('你好，世界！', {
+const taskId = await _aliyunTTS.task('你好，世界！', {
   /** options **/
 });
+
 console.log(taskId);
 ```
 
-### `taskSync(text: string, options: NLSOption, interval?: number): Promise<NLSComplete>;`
+#### `taskSync(text: string, options: AliyunTTS.TTSOption, interval?: number): Promise<AliyunTTS.TTSComplete>;`
 
 同步返回合成结果。
 
@@ -93,10 +116,10 @@ console.log(taskId);
 - `options` NLSOption - 高级设置。
 - `interval` number (optional) - 检查转换状态的轮训事件间隔（秒）。
 
-返回值 `Promise<NLSComplete>` - 转换状态。
+返回值 `Promise<AliyunTTS.TTSComplete>` - 转换状态。
 
 ```js
-const rlt = await _aliyunNls.taskSync('你好，世界！', {
+const rlt = await _aliyunTTS.taskSync('你好，世界！', {
   format: 'mp3'
   sample_rate: 16000,
   voice: 'xiaoyun',
@@ -106,12 +129,12 @@ const rlt = await _aliyunNls.taskSync('你好，世界！', {
   /* options */
 });
 
-console.log('audio url => ', rlt.audio_address);
+console.log('complete result => ', JSON.stringify(rlt));
 ```
 
-## 定义
+### 定义
 
-### NLSOption
+#### AliyunTTS.TTSOption
 
 - `appKey` - 应用 Key,可选。
 - `format` - 音频编码格式，支持 pcm/wav/mp3 格式，默认是 pcm。
@@ -124,12 +147,17 @@ console.log('audio url => ', rlt.audio_address);
 - `enable_notify` - 是否启用回调功能，默认值为 false。
 - `notify_url` - 回调服务的地址。当 enable_notify 取值为 true 时，本字段必填。URL 支持 HTTP/HTTPS 协议，Host 不能使用 IP 地址。
 
-### NLSComplete
+#### AliyunTTS.TTSComplete
 
-- `task_id` string - 任务 ID
-- `audio_address` string - 合成的音频 URL
-- `notify_custom` string - 回调地址
-- `sentences` json - 句级时间戳对象
+- `task_id` string - 任务 ID。
+- `audio_address` string - 合成的音频 URL。
+- `notify_custom` string - 回调地址。
+- `sentences` json - 句级时间戳对象。
+- `appKey`: string - 使用的APP Key。
+- `options`: AliyunTTS.TTSOption - 合成选项。
+- `text`: string - 待合成文本。
+- `startTime`: number - 合成开始时间（毫秒时间戳）。
+- `elapsed`: number - 合成耗时（毫秒）。
 
 ## Author
 

@@ -196,7 +196,7 @@ declare namespace AliyunTTS {
     text: string;
 
     /**
-     * 开始时间（毫秒时间戳）
+     * 合成开始时间（毫秒时间戳）
      */
     startTime: number;
 
