@@ -68,7 +68,7 @@ const { AliyunTTS } = require(/aliyun-nls');
 })();
 ```
 
-了解更多 [TTS Define](https://github.com/funnyzak/aliyun-nls/blob/master/lib/tts.d.ts).
+了解更多 [TTS Define](https://github.com/funnyzak/aliyun-nls/blob/master/lib/nls.d.ts).
 
 ### 函数
 
