@@ -1,6 +1,6 @@
 {
-  "name": "@funnyzak/aliyun-nls",
-  "version": "1.1.2",
+  "name": "aliyun-nls",
+  "version": "0.1.0",
   "description": "a aliyun nls node module.",
   "main": "index.js",
   "files": [
