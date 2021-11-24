@@ -15,7 +15,7 @@
 [download-image]: https://img.shields.io/npm/dm/aliyun-nls.svg?style=flat-square
 [download-url]: https://npmjs.org/package/aliyun-nls
 
-阿里云自然语言处理 Node 模块。
+阿里云智能语音处理 Node 模块。
 
 ## 目录
 
