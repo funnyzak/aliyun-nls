@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/funnyzak/aliyun-nls#readme",
   "dependencies": {
-    "@alicloud/pop-core": "1.7.10",
+    "@alicloud/pop-core": "1.7.12",
     "@babel/runtime": "7.16.3",
     "chalk": "4.1.2",
     "request": "2.88.2",
